@@ -1,7 +1,4 @@
 package com.example.recipeapi;
-
-
-import com.example.recipeapi.Model.Ingredients;
 import com.example.recipeapi.Model.Recipe;
 import com.example.recipeapi.Repository.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,13 +29,7 @@ class RecipeServiceTest {
 
     @Test
     void saveARecipe() {
-        Recipe recipe = new Recipe(
-                "Blackberry pie",
-                List.of(
-                        new Ingredients("blackberries", "600g"),
-                        new Ingredients("self-raising flour", "300g (plus extra for dusting)")),
-                "First, make the pastry. Tip both flours and the sugar into a bowl with a large pinch of salt..."
-        );
+        Recipe recipe = new Recipe();
         underTest.save(recipe);
 
         ArgumentCaptor<Recipe> recipeArgumentCaptor = ArgumentCaptor.forClass(Recipe.class);
@@ -52,6 +43,8 @@ class RecipeServiceTest {
 
     @Test
     void canFindAllRecipes() {
+        underTest.findAllRecipes();
+        verify(recipeRepository).findAll();
     }
 
     @Test
